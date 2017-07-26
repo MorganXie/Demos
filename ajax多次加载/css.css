@@ -1,0 +1,40 @@
+
+
+body{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+ul,li,a {
+	margin :0 ;
+	padding: 0;
+    text-decoration: none;
+    list-style: none;
+}
+
+.btn {
+	display: inline-block;
+	
+    color: red;
+    border: 1px solid red;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+#ct {
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+
+
+#ct>li {
+    width: 500px;
+    padding: 10px;
+    margin: 10px;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
