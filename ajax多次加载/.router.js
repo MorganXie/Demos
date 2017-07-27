@@ -14,4 +14,4 @@ app.get('/loadMore', function(req, res) {
     }
 
 );}
- module.exports.setRouter = setRouter;
+ module.exports.setRouter = setRouter
