@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>降域</title>
+</head>
+<style>
+	input {
+		margin:20px;
+		width:200px;
+	}
+</style>
+<body>
+
+<input type="text" id="input" placeholder="http://b.xiexuan.com:8080/b.html">
+<script >
+	
+$('#input').addEventListener('input' ,function (){
+	window.parent.postMessage(this.value,'*');
+})
+
+window.addEventListener('message',function (e){
+	$('#input').value = e.data;
+	console.log(e.data);
+})
+
+function $(id){
+	return document.querySelector(id);
+}
+
+</script>
+	
+</body>
+</html>

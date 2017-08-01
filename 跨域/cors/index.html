@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+
+<body>
+    <div class="container">
+        <ul class="news">
+            <li>长江救援队今夏已救起36人 “黄T恤”成为市民守护神</li>
+            <li>建军90周年阅兵今举行 受阅部队整装待阅</li>
+            <li>王者荣耀12岁以下每日限玩1小时</li>
+        </ul>
+        <button class="change">换一组</button>
+    </div> 
+    <script>
+    function $(id) {
+        return document.querySelector(id);
+    }
+
+    $('.change').addEventListener('click', function() {
+
+        var xhr = new XMLHttpRequest();
+        xhr.open('get','http://nice.localhost:8080/getNews' ,true);
+        xhr.send();
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                appendHtml(JSON.parse(xhr.responseText));
+
+            }
+        }
+
+    })
+
+    function appendHtml(news) {
+        var html = '';
+        for (var i = 0; i < news.length; i++) {
+        	html += '<li>' + news[i] + '</li>';
+
+        }
+
+        console.log(html);
+        $('.news').innerHTML = html;
+
+    }
+    </script>
+</body>
+
+</html>

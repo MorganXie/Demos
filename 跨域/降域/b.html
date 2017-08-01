@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>降域</title>
+</head>
+<style>
+	
+</style>
+<body>
+
+<input type="text" id="input" placeholder="http://b.xiexuan.com:8080/b.html">
+<script >
+	document.querySelector('#input').addEventListener('input',function (){
+		window.parent.document.querySelector('input').value =this.value;
+	})
+
+	document.domain = "xiexuan.com"; //降域
+
+
+</script>
+	
+</body>
+</html>
