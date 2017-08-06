@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>news lazy load</title>
+    <script src="http://kejian.jirengu.com/static/js/jquery-1.11.1.min.js"></script>
+    <link rel="stylesheet" href="news lazyLoad.css">
+
+</head>
+
+<body>
+    <div class="container">
+        <ul>
+            <li class="each-news">
+                <a href="#">
+                    <img src="http://inews.gtimg.com/newsapp_ls/0/531730377_150120/0" alt="">
+                    <div class="each-text">
+                        <h3>中国轰6K研发险些被俄罗斯发动机厂商卡脖子</h3>          
+                        <p>近日，轰6K＂战神＂轰炸机首次公开亮相。在中国···</p>
+                    </div>
+                </a>
+            </li>
+            <li class="each-news">
+                <a href="#">
+                    <img src="http://inews.gtimg.com/newsapp_ls/0/1850819763_150120/0" alt="">
+                    <div class="each-text">
+                        <h3>乐视网原第二大股东：呼吁成立“困境基金”挺贾跃亭</h3>
+                        <p>鑫根将联合其他股东，成立“困境基金”对乐视...</p>
+                    </div>
+                </a>
+            </li>
+        </ul>
+        <div class="loadMore">加载更多</div>
+    </div>
+    <script>
+    var pageIndex = 0;
+    var isOver = false;
+    var isNewArrive = true;
+    getNews();
+
+    $(window).on('scroll', checkNews);
+
+
+    function checkNews() {
+        if (isShow($('.loadMore')) && isNewArrive && isOver) {
+            getNews();
+        }
+    }
+
+
+
+    function getNews() {
+        isNewsArrive = false;
+        $.get('/getNews', { page: pageIndex }).success(function(ret) {
+            isNewsArrive = true;
+            if (ret.status === 0) {
+                pageIndex++;
+                appendNews(ret.data)
+                checkNews()
+            } else {
+                console.log('获取新闻出错')
+            }
+        }).fail(function() {
+            console.log('系统异常')
+        })
+    }
+
+    function isShow($node) {
+        var windowHeight = $(window).height(),
+            scrollTop = $(window).scrollTop();
+        offsetTop = $node.offset().top,
+            nodeHeight = $node.height();
+        if (windowHeight + scrollTop >= offsetTop && scrollTop < offsetTop + nodeHeight) {
+            return true;
+        }
+        return false
+
+    }
+
+    function appendNews(news) {
+        $.each(news, function() {
+            html =
+                `
+             <li class="each-news">
+                <a href="#">
+                    <img src=` + news.img + ` alt="">
+                    <div class="each-text">
+                        <h3>` + news.title + `</h3>          
+                        <p>` + news.brif + `</p>
+                    </div>
+                </a>
+            </li>
+
+            `;
+
+        })
+        $('.container>ul').append(html);
+    }
+    </script>
+</body>
+
+</html>
