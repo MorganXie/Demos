@@ -1,7 +1,7 @@
 
 
 app.get('/getNews', function(req,res) {
-    var news = [{
+    var newsList = [{
             link: '#',
             img: 'http://inews.gtimg.com/newsapp_ls/0/1851131424_150120/0',
             title: '1木工大哥花10万“美国一月游” 牵出特大偷渡案',
@@ -155,7 +155,7 @@ app.get('/getNews', function(req,res) {
 
     var pageIndex = req.query.page;
     var len = 3;
-    retNews = news.slice(pageIndex * len, pageIndex * len + len);
+    retNews = newsList.slice(pageIndex * len, pageIndex * len + len);
 
     res.send({
         status: 0,

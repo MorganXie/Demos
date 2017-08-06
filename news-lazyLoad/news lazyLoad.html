@@ -6,7 +6,6 @@
     <title>news lazy load</title>
     <script src="http://kejian.jirengu.com/static/js/jquery-1.11.1.min.js"></script>
     <link rel="stylesheet" href="news lazyLoad.css">
-
 </head>
 
 <body>
@@ -43,7 +42,7 @@
 
 
     function checkNews() {
-        if (isShow($('.loadMore')) && isNewArrive && isOver) {
+        if (isShow($('.loadMore')) && isNewArrive) {
             getNews();
         }
     }
@@ -67,27 +66,32 @@
     }
 
     function isShow($node) {
-        var windowHeight = $(window).height(),
-            scrollTop = $(window).scrollTop();
+        var windowHeight = $(window).height();
+        
+        scrollTop = $(window).scrollTop(),
+        
         offsetTop = $node.offset().top,
-            nodeHeight = $node.height();
+        
+        nodeHeight = $node.height();
+        
         if (windowHeight + scrollTop >= offsetTop && scrollTop < offsetTop + nodeHeight) {
+            
             return true;
         }
         return false
 
     }
 
-    function appendNews(news) {
-        $.each(news, function() {
+    function appendNews(newsList) {
+        $.each(newsList, function() {
             html =
                 `
              <li class="each-news">
                 <a href="#">
-                    <img src=` + news.img + ` alt="">
+                    <img src=` + this.img + ` alt="">
                     <div class="each-text">
-                        <h3>` + news.title + `</h3>          
-                        <p>` + news.brif + `</p>
+                        <h3>` + this.title + `</h3>          
+                        <p>` + this.brif + `</p>
                     </div>
                 </a>
             </li>
