@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    .img-preview{
+      width: 1000px;
+      margin: 20px auto;
+  
+    }
+    .img-row {
+      margin-bottom: 8px;
+    }
+    .img-row:after {
+      content: "";
+      display: block;
+      clear: both;
+    }
+    .img-box {
+      float: left;
+      
+
+    }
+    .img-line .img-box:first-child {
+      padding-left: 0;
+    }
+    .loadmore{
+        visibility: hidden;
+        height: 50px;
+    }
+  </style>
+</head>
+<body>
+    <div class="img-preview"></div>
+    <div class="loadmore">实现懒加载专用，我是看不见的</div>
+    <script>
+        function Barrels($ct){
+            this.$ct = $ct;
+            this.rowList = []
+            this.isLoaded = true;
+            //this.loadImg();
+            this.baseHeight = 160;
+            //this.lazyLoad()
+            this.loadmore = $('.loadmore');
+        }
+        Barrels.prototype = {
+            //加载完图片后，获取图片的宽高
+            loadImg: function(){
+                this.isLoaded = false
+                var _this = this;
+                var imgs = this.getImgUrls(20);
+                $.each(imgs,function(idx, url){
+                    var img = new Image();//对每一张图片 都创建一个图片对象
+                    img.src = url
+                    //console.log(img.src) //没问题
+                    img.onload = function(){
+                        //console.log(img.height)
+                        var originWidth = img.width,
+                            originHeight = img.height,
+                            ratio = originWidth/originHeight;
+                            console.log('height:'+img.height)
+                        var imgInfo = {
+                            target: $(img),
+                            width: _this.baseHeight*ratio,
+                            height: _this.baseHeight,
+                            ratio: ratio
+                        };
+                    _this.render(imgInfo);
+                    }
+                })
+                 this.isLoaded = true
+            },//定义一个数组，用于放置一行的元素
+            render: function(imgInfo){
+                var _this = this;
+                var clientWidth = this.$ct.width();
+                //console.log(clientWidth)
+                var rowWidth = 0;
+                var rowHeight = 0;
+                var lastImgInfo = imgInfo;
+                this.rowList.push(imgInfo);
+                for(var i=0;i<this.rowList.length;i++){
+                    rowWidth = rowWidth + this.rowList[i].width;
+                    
+                }
+                
+                if(rowWidth > clientWidth){
+                    this.rowList.pop();//最后一个拿出去
+                    rowWidth = rowWidth - lastImgInfo.width;
+                    rowHeight = clientWidth * _this.baseHeight / rowWidth;
+                    this.layout(rowHeight); //摆放
+                    this.rowList = [];//清空
+                    this.rowList.push(lastImgInfo);
+                }
+            },
+            //拼装html并渲染道页面
+            layout: function(rowHeight){
+                console.log('createRow');
+                var $rowCt = $('<div class="img-row"></div>');
+                $.each(this.rowList,function(idx,imgInfo){
+                    var $imgCt = $('<div class="img-box"></div>'),
+                        $img = $(imgInfo.target);
+                        $img.height(rowHeight);
+                        $imgCt.append($img);
+                        $rowCt.append($imgCt);
+                });
+                console.log(this.$ct)
+                 this.$ct.append($rowCt);
+            },
+            //获取图片地址
+            getImgUrls: function(num){
+                var width,height,urls = [];
+                for(var i=0;i<num;i++){
+                    width = Math.floor(Math.random()*300+500);
+                    height = Math.floor(Math.random()*400+200);
+                    urls.push('https://lorempixel.com/'+width+'/'+height+'/');
+                }
+                return urls;
+            },
+            isVisible: function($el){
+                var scrollH = $(window).scrollTop(),
+                winH = $(window).height(),
+                top = $el.offset().top;
+                //当元素距离页面顶部的高度< 窗口高度+滚动距离 元素可见
+                if(top < winH + scrollH){
+                    return true;
+                }else{
+                    return false;
+                }
+            },
+         
+            init:function(){
+                var self = this;
+                this.loadImg();
+                $(window).on('scroll',function(){
+                    if(!self.isLoaded){
+                        return
+                    }
+                    if(self.isVisible(self.loadmore)){
+                        self.loadImg();
+                    }
+                })
+            }
+        }
+        var barrels = new Barrels($('.img-preview'))
+        barrels.init();
+    </script>
+</body>
+</html>

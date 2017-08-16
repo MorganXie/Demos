@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
+    <style>
+    html,
+    body,
+    ul,
+    li,
+    p,
+    div {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    ul,
+    li {
+        list-style: none;
+    }
+
+    .wrap {
+        width: 900px;
+    }
+
+    .clearfix:after {
+        content: '';
+        display: block;
+        clear: both;
+    }
+
+    #pic-ct {
+        position: relative;
+        dibu
+    }
+
+    #pic-ct .item {
+        position: absolute;
+        padding: 0 0 10px 0;
+        width: 280px;
+        margin: 10px;
+        border: 1px solid #DFDFDF;
+        background-color: #fff
+    }
+
+    .item img {
+        margin: 10px;
+        width: 260px;
+    }
+
+    .item .header {
+        height: 25px;
+        margin: 0 12px;
+        border-bottom: 1px solid #DBDBDB;
+    }
+
+    #pic-ct .description {
+        font-size: 12px;
+
+        margin: 10px 15px 0;
+        color: #777371;
+    }
+
+
+    .load {
+        visibility: hidden;
+        height: 20px;
+    }
+
+    .hide {
+        display: none;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <div class="ct-waterfall">
+            <ul id="pic-ct" class="clearfix">
+                 <!-- li class="item">
+                    <a href="#" class="link">
+					<img src="http://n.sinaimg.cn/tech/transform/20170808/cjhk-fyitapv9223417.jpg" alt="">
+				</a>
+                    <h4 class="header">树蛙打自卫拳滑稽动作惹人发笑</h4>
+                    <p class="description">
+                        摄影师拍摄了一组“功夫”树蛙照片，滑稽有趣，引起广大网友关注。
+                    </p>
+                </li> -->
+                <li class="item hide"></li>
+            </ul>
+            <div class="load">看不见的</div>
+        </div>
+    </div>
+    <script>
+    var curPage = 1;
+    var perPageCount = 10;
+    var colSumHeight = [];
+    var nodeWidth = $('.item').outerWidth(true);
+    var colNum = parseInt($('#pic-ct').width()/nodeWidth);
+    for(var i = 0 ; i<colNum.length ; i++){
+        colSumHeight[i]= 0 ;
+    }
+
+    getData(function(newsList) {
+        $.each(newsList,function(idx, news) {
+            var $node = getNode(news);
+            $node.find('img').on('load',function(){
+            	$('#pic-ct').append($node);
+            	console.log('loading');
+                waterFallPlace($node);
+            })
+       })
+
+    })
+
+
+    
+        $(window).scroll(function() {
+            if (isVisible($('.load'))) {
+                getData(function(newsList) {
+                    nodes = getNodes(newsList)
+                    waterFallPlace(nodes);
+                })
+            }
+        })
+    
+    function getData(callback) {
+        $.ajax({
+            url: 'http://platform.sina.com.cn/slide/album_tech',
+            dataType: 'jsonp',
+            jsonp: "jsoncallback",
+            data: {
+                app_key: '1271687855',
+                num: perPageCount,
+                page: curPage
+            }
+        }).done(function(ret) {
+            if (ret && ret.status && ret.status.code === '0') {
+                callback(ret.data);
+                curPage++
+            } else {
+                console.log('get error data');
+            }
+        })
+    }
+
+    function getNode(item){
+        var htmls =`<li class="item">
+                    <a href="#" class="link">
+						<img src=` + item.img_url + ` alt="">
+					</a>
+                    <h4 class="header">` +item.short_name + `</h4>
+                    <p class="description">
+                        ` + item.short_intro + `
+                    </p>
+                </li>` ;
+        return $(htmls);
+    }
+
+    function waterFallPlace($node){
+        var idx= 0,
+            minSumHeight = colSumHeight[0];
+
+            for(var i = 0 ;i <colSumHeight.length; i++){
+                if(colSumHeight[i]<minSumHeight){
+                    idx= i ;
+                    minSumHeight= colSumHeight[i];
+                }
+            }
+
+            $node.css({
+                left:nodeWidth*idx,
+                top:minSumHeight,
+                opacity:1
+            });
+
+            colSumHeight[idx] = $node.outerHeight(true)+colSumHeight[idx];
+            $('#pic-ct').height(Math.max.apply(null,colSumHeight));
+
+    }
+    </script>
+</body>
+
+</html>

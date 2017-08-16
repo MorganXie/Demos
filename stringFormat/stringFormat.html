@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>stringFormat</title>
+</head>
+
+<body>
+
+</body>
+<script>
+	function stringFormat(string){
+
+		var params= [].slice.call(arguements,1);
+		var regex = /\{(\d+)\}/g;
+
+		//将字符串的{n}替换为params[n]
+
+		string = string.replace(regex,function (){
+			var index = arguements[1];
+			return params[ index];
+		})
+		return string;
+
+	}
+
+	stringFormat()
+</script>
+
+</html>
