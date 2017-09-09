@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <style>
+        html,body,ul,li,p,div{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    ul,li{
+        list-style: none;
+    }
+  .wrap{
+    width: 900px;
+        margin: 0 auto;
+  }
+    .clearfix:after{
+        content: '';
+        display: block;
+        clear: both;
+    }
+    #pic-ct{
+        position: relative;
+    }
+    #pic-ct .item{
+        position: absolute;
+        padding: 0 0 10px 0;
+        width: 280px;
+        margin: 10px;
+        border: 1px solid #DFDFDF;
+        background: #FFF;
+        opacity: 0;
+        transition: all .8s;
+    }
+    #pic-ct .item img{
+        margin: 10px;
+        width: 260px;
+    }
+    #pic-ct .item .header{
+        height: 25px;
+        margin: 0 12px;
+        border-bottom: 1px solid #DBDBDB;
+    }
+    #pic-ct .desp{
+        font-size: 12px;
+        line-height: 1.8;
+      margin: 10px 15px 0;
+      color: #777371;
+    }
+    #load{
+        visibility: hidden;
+        height: 50px;
+    }
+    .hide{
+        display: none;
+    }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <div class="ct-waterfall">
+            <ul id="pic-ct" class="clearfix">
+                <!--<li class="item">
+                    <a href="#" class="link">
+                        <img src="http://n.sinaimg.cn/tech/transform/20170731/KkZt-fyinvys9427790.jpg">
+                    </a>
+                    <h4 class="header">印度小象为解口渴不慎落入水池</h4>
+                    <p class="desp">
+                        视频记录了一头大象被困在水中后、急于从水池中脱身的过程。
+                    </p>
+                </li>-->
+                <!--用于计算 item 宽度和列数，但不展示出来-->
+                <li class="item hide"></li> 
+            </ul>
+            <div id="load">实现懒加载专用，我是看不见的</div>
+        </div>
+    </div>
+</body>
+<script>
+    //1,获取数据
+    //2,把数据变为DOM 通过瀑布流的方式放到页面上
+    //3.当页面滚动到底部的时候
+    //4.在获取到来自后端的数据之前，li的高度是得不到的
+    var curPage = 1
+    var perPageCount = 10
+    
+    var isDataArrive = true
+    start()
+    function start(){
+        getData(function(newsList){
+            //console.log(newsList)
+            isDataArrive = true
+            $.each(newsList, function(idx,news){
+                var $node = getNode(news)
+                $node.find('img').load(function(){
+                    $('#pic-ct').append($node) //等到图片加载完毕之后 再把节点放到页面上
+                    //console.log($node, 'loaded...')
+                    waterFallPlace($node)
+                })
+            })
+        })
+        isDataArrive = false    
+    }
+    $(window).scroll(function(){
+        if(!isDataArrive) return
+        if(isVisible($('#load'))){
+            start()
+        }
+    })
+    function getData(callback){
+        $.ajax({
+            url: 'https://platform.sina.com.cn/slide/album_tech',
+            dataType: 'jsonp',//这里是用了新浪新闻的jsonp接口，参考数据如http://platform.sina.com.cn/slide/album_tech?jsoncallback=func&app_key=1271687855&num=3&page=4
+            jsonp:"jsoncallback",//jsonp传递的函数名
+            data: {//传递给后台的参数
+                app_key: '1271687855',
+                num: perPageCount, //每页要多少数据
+                page: curPage //第几页
+            }
+        }).done(function(ret){
+            if(ret && ret.status &&ret.status.code === "0"){
+                callback(ret.data); //如果数据没问题，那么生成节点并摆放好数据
+                curPage++;
+                console.log("111")
+            }else{
+                console.log('get error data')
+            }
+        })
+    }
+    
+    //将数据拼装成html 并返回一个jquery对象
+    function getNode(item){
+        var tpl = ''
+        tpl+= '<li class="item">'
+        tpl+= '<a href="'+item.url +'class="link"><img src="' + item.img_url + '"></a>'
+        tpl+= '<h4 class="header">' + item.short_name + '</h4>'
+        tpl+= '<p class="desp">'+ item.short_intro + '</p>'
+        tpl+= '</li>'
+        return $(tpl)
+        
+    }
+    var nodeWidth = $('.item').outerWidth(true)
+    var colLength = parseInt($('#pic-ct').width()/nodeWidth)
+        var itemArr = []
+        for(var i=0;i<colLength;i++){
+            itemArr[i] = 0
+        }
+    function waterFallPlace($nodes){
+        
+        //  注意是$nodes 不是所有.item
+        $nodes.each(function(){ 
+            var minValue = Math.min.apply(null,itemArr)//得到最小值
+            var minIndex = itemArr.indexOf(minValue)
+            var $cur = $(this)
+            $cur.css({
+                top: itemArr[minIndex],
+                left: nodeWidth * minIndex,
+                opacity: 1//outerWidth(true)包括边框和外边距
+            })
+            itemArr[minIndex]  += $cur.outerHeight(true) //高度更新
+        })
+        $('#pic-ct').height(Math.max.apply(null,itemArr));
+    }
+    function isVisible($el){
+        var scrollH = $(window).scrollTop(),
+            winH = $(window).height(),
+            top = $el.offset().top;
+        //当元素距离页面顶部的高度< 窗口高度+滚动距离 元素可见
+        if(top < winH + scrollH){
+            return true;
+        }else{
+            return false;
+        }
+    }
+</script>
+</html>

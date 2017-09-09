@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="123.css">
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <div class="tab">
+        <ul class="tab-header clearfix">
+            <li class="">选项1</li>
+            <li class="active">选项2</li>
+            <li>选项3</li>
+        </ul>
+        <ul class="tab-container">
+            <li class="active">内容1</li>
+            <li>内容2</li>
+            <li>内容3</li>
+        </ul>
+    </div>
+    <div class="tab">
+        <ul class="tab-header clearfix">
+            <li class="">选项1</li>
+            <li class="active">选项2</li>
+            <li>选项3</li>
+            <li>选项4</li>
+        </ul>
+        <ul class="tab-container">
+            <li class="active">内容1</li>
+            <li>内容2</li>
+            <li>内容3</li>
+            <li>内容4</li>
+        </ul>
+    </div>
+    <script>
+    function Tab(ct) {
+        this.ct = ct;
+        this.init();
+        this.bind();
+    }
+
+
+    Tab.prototype.init = function() {
+    	
+        this.tabList = this.ct.find('.tab-header > li');
+        this.panelsList = this.ct.find('.tab-container >li');
+        
+
+    }
+
+    Tab.prototype.bind = function() {
+    	var _this = this;
+    	console.log(_this);
+    	this.tabList.each(function (index,tabli){
+    	
+    		$(tabli).click(function (e){
+    			var $target = $(e.target);
+    			var $index = $target.index();
+    			console.log($index);
+    			_this.tabList.each(function(index,li){
+    				
+    				$(li).removeClass('active');
+    			})
+    			$target.addClass('active');
+    			_this.panelsList.each(function(index,panels){
+    				$(panels).removeClass('active');
+    			})
+    			$(_this.panelsList[index]).addClass('active');
+    		})
+    	})
+    }
+
+    
+    var tab1 = new Tab($('.tab').eq(0));
+    var tab2 = new Tab ($('.tab').eq(1));
+    </script>
+</body>
+
+</html>
