@@ -4,7 +4,7 @@ module.exports = {
 	entry:'./js/index.js',
 	//定义打包输出文件路径
 	output:{
-		path:'/Users/xx/Desktop/webpack-15/bin',
+		path:'/Users/xx/Desktop/webpack-Demo/bin',
 		filename:'webpack.merge.js'
 	}
 	
