@@ -32,7 +32,7 @@ var Lazyload = (function(){
 		getData:function(){
 			var self = this
 			$.ajax({
-				url:'http://platform.sina.com.cn/slide/album_tech',
+				url:'https://platform.sina.com.cn/slide/album_tech',
 				type:'get',
 				dataType:'jsonp',
 				jsonp:'jsoncallback',
