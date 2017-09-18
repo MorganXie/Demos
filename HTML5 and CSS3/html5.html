@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		
+		.panel{
+			width: 100px;
+			border:1px red solid ;
+
+		}
+
+		.panel>h1{
+			font-size: 14px;
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+		}
+
+		.circle{
+			margin: 50px;
+			height: 50px;
+			width: 100px;
+			border:1px solid red;		
+			border-radius: 50px 50px 0 0 ;
+
+		}
+		.box1{
+			width: 200px;
+			height: 50px;
+			background :linear-gradient(to bottom ,red ,blue);
+      box-shadow: 5px 8px 10px 1px;
+		}
+
+		.transition{
+			margin: 50px;
+			width: 100px;
+			height:100px;
+			background-color: red;
+			transition: 1s;
+		}
+
+		.transition:hover{
+			width: 50px;
+			height: 50px;
+			background-color: yellow;
+		}
+
+
+		@keyframes rainbow{
+
+			0%{ background:#c00; }
+			50%{background:orange; height: 300px;border-radius: 50%; }
+      75%{background: #00b7f4 ;height: 300px;border-radius: 50%; }
+			100%{background:yellowgreen;}
+
+
+		}
+
+		.animation{
+			margin: 50px;
+			width: 300px;
+			height: 50px;
+			background-color: red;
+      animation: 3s rainbow infinite;
+		}
+
+
+	</style>
+</head>
+<body>
+	
+
+
+<div class="circle"></div>
+
+<div class="box1">阴影</div>
+
+<div class="transition">
+  过渡效果
+</div>
+
+<div class="animation">
+	动画
+</div>
+
+</body>
+</html>
