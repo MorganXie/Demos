@@ -1,0 +1,90 @@
+body {
+    font: 14px/1.5 'Microsoft YaHei';
+    background: #0DCECB;
+    overflow: hidden;
+}
+
+a {
+    text-decoration: none;
+    color: #fff;
+}
+
+.content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 100px;
+    flex-direction: column;
+
+}
+
+.loading, .loading::before, .loading::after {
+    width: 10px;
+    height: 40px;
+    background: #fff;
+    animation: loading1 1s infinite ease-in-out;
+
+}
+
+.loading {
+    position: relative;
+    margin: 100px auto;
+    animation-delay: 0.16s;
+}
+
+.loading::before, .loading::after {
+    position: absolute;
+    content: '';
+    top: 0;
+}
+
+.loading::before {
+    left: -15px;
+
+}
+
+.loading::after {
+    left: 15px;
+    animation-delay: 0.32s;
+}
+
+@keyframes loading1 {
+    0%,
+    80%,
+    100% {
+        box-shadow: 0 0 #fff;
+        height: 40px;
+
+    }
+
+    10% {
+        box-shadow: 0 -20px #fff;
+        height: 50px;
+    }
+
+}
+
+
+
+.loading-circle{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border:15px solid rgba(41,0,0,0.3);
+    border-top-color: #fff;
+    animation: loading2 1s linear infinite;
+
+
+
+}
+
+
+
+@keyframes loading2 {
+    0%{
+        transform: rotate(0deg);
+    }
+    100%{
+        transform: rotate(360deg);
+    }
+}
