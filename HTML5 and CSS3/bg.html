@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    .cover{
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url("http://shp.qpic.cn/ishow/2735090412/1504498773_1644740874_8004_sProdImgNo_2.jpg/0")   no-repeat;
+      background-size: cover;
+    }
+
+    .cover:before {
+      content: '';
+      display: block;
+      width: 50%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      background: linear-gradient(to  right, rgba(255,0,0,0), rgb(1, 1, 1));
+    }
+    .cover:after {
+      content: '';
+      display: block;
+      width: 50%;
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(to  left, rgba(255,0,0,0), rgb(1, 1, 1));
+    }
+  </style>
+</head>
+<body>
+  <div class="cover">
+  </div>
+</body>
+</html>

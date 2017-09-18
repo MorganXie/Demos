@@ -64,27 +64,21 @@ a {
 
 }
 
-
-
-.loading-circle{
+.loading-circle {
     width: 100px;
     height: 100px;
     border-radius: 50%;
-    border:15px solid rgba(41,0,0,0.3);
+    border: 15px solid rgba(41, 0, 0, 0.3);
     border-top-color: #fff;
     animation: loading2 1s linear infinite;
 
-
-
 }
 
-
-
 @keyframes loading2 {
-    0%{
+    0% {
         transform: rotate(0deg);
     }
-    100%{
+    100% {
         transform: rotate(360deg);
     }
 }
