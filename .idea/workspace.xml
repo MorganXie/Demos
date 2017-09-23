@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f41754ec-383c-4491-b1c4-fb414c745e90" name="Default" comment="media query">
+    <list default="true" id="f41754ec-383c-4491-b1c4-fb414c745e90" name="Default" comment="weather">
       <change type="DELETED" beforePath="$PROJECT_DIR$/weather/index.js" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/weather/node_modules/axios/CHANGELOG.md" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/weather/node_modules/axios/LICENSE" afterPath="" />
@@ -174,11 +174,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="media-query.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="media-query.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/media query and Grid System/media-query.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="482">
-              <caret line="52" column="7" lean-forward="false" selection-start-line="52" selection-start-column="7" selection-end-line="52" selection-end-column="7" />
+            <state relative-caret-position="404">
+              <caret line="49" column="0" lean-forward="true" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/weather/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="138">
+              <caret line="7" column="44" lean-forward="true" selection-start-line="7" selection-start-column="44" selection-end-line="7" selection-end-column="44" />
               <folding />
             </state>
           </provider>
@@ -235,7 +245,7 @@
     <handled-path value="$PROJECT_DIR$/npm-weather/node_modules" />
     <handled-path value="$PROJECT_DIR$/webpack-Demo/node_modules" />
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="1">
     <option name="y" value="23" />
     <option name="width" value="1440" />
     <option name="height" value="791" />
@@ -293,6 +303,11 @@
               <item name="Demos" type="462c0819:PsiDirectoryNode" />
               <item name="media query and Grid System" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="Demos" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Demos" type="462c0819:PsiDirectoryNode" />
+              <item name="weather" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -344,7 +359,7 @@
       <workItem from="1505786211663" duration="448000" />
       <workItem from="1505786682066" duration="576000" />
       <workItem from="1505787320937" duration="3652000" />
-      <workItem from="1506147517092" duration="9000" />
+      <workItem from="1506147517092" duration="144000" />
     </task>
     <task id="LOCAL-00001" summary="second commit">
       <created>1505657668769</created>
@@ -402,16 +417,24 @@
       <option name="project" value="LOCAL" />
       <updated>1505798690503</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="weather">
+      <created>1506147540306</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1506147540306</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="18288000" />
+    <option name="totallyTimeSpent" value="18423000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1440" height="791" extended-state="0" />
+    <frame x="0" y="23" width="1440" height="791" extended-state="1" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22361112" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22361112" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297362" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -444,21 +467,14 @@
     <MESSAGE value="commit bg.html" />
     <MESSAGE value="commit all" />
     <MESSAGE value="media query" />
-    <option name="LAST_COMMIT_MESSAGE" value="media query" />
+    <MESSAGE value="weather" />
+    <option name="LAST_COMMIT_MESSAGE" value="weather" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/webpack-Demo/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1690">
-          <caret line="65" column="120" lean-forward="false" selection-start-line="65" selection-start-column="39" selection-end-line="65" selection-end-column="120" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/HTML5 and CSS3/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -811,8 +827,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/media query and Grid System/media-query.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="482">
-          <caret line="52" column="7" lean-forward="false" selection-start-line="52" selection-start-column="7" selection-end-line="52" selection-end-column="7" />
+        <state relative-caret-position="404">
+          <caret line="49" column="0" lean-forward="true" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/weather/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="138">
+          <caret line="7" column="44" lean-forward="true" selection-start-line="7" selection-start-column="44" selection-end-line="7" selection-end-column="44" />
           <folding />
         </state>
       </provider>
