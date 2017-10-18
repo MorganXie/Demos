@@ -5,6 +5,9 @@
 
 [预览地址](http://xie-xuan.top/weather/)
 
+##  木桶布局实现照片墙
+
+[预览地址](http://xie-xuan.top/%E7%85%A7%E7%89%87%E5%A2%99/)
 
 ##  Carousel
 [预览地址](http://xie-xuan.top/carousel/carousel.html#)
